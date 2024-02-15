@@ -10,7 +10,8 @@ class PostController extends Controller
 {
     public function index() {
 
-        $posts = Post::all(); // Select * from posts
+        // $posts = Post::orderBy('id', 'DESC')->paginate(4); // Select * from posts
+        $posts = Post::latest()->take(4)->get();
         $userType = auth()->user()->user_type;
 
         if ($userType === 'volunteer') {

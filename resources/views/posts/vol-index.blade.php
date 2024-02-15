@@ -56,6 +56,14 @@
           @endforeach
         </tbody>
       </table>
+
+    {{-- <div class="container ">
+
+      {{ $posts->links()}}
+
+    </div> --}}
+
+    
     </div>
 
     <script>
