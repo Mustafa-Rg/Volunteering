@@ -20,16 +20,19 @@
                     <input type="text" name="title" class="form-control" id="title" autofocus  placeholder="Add the post's title" value="{{old('title')}}">
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label" >Description</label>
-                    <textarea name="description" class="form-control" id="description" rows="3" value="{{old('description')}}"></textarea>
-                </div>
-                <div class="mb-3">
                     <label for="city" class="form-label" >City</label>
-                    <input type="text" name="city" class="form-control" id="city" autofocus  placeholder="Add the city" value="{{old('city')}}">
+                    <input type="text" name="city" class="form-control" id="city"  placeholder="Add the city" value="{{old('city')}}">
                     
                     <input type="hidden" value="{{ auth()->user()->name}} " name="post_creator">
                 </div>
-
+                <div class="mb-3">
+                    <label for="category" class="form-label" >Category</label>
+                    <input type="text" name="category" class="form-control" id="category"   placeholder="Add the post's category" value="{{old('category')}}">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label" >Description</label>
+                    <textarea name="description" class="form-control" id="description" rows="3" value="{{old('description')}}"></textarea>
+                </div>
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-success">Create</button>

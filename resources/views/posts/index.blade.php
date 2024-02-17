@@ -13,17 +13,25 @@
     <!--Search bar-->
     <nav class="navbar bg-light">
       <div class="container-fluid">
-        <form class="d-flex" id="searchForm" method="GET" onsubmit="search(event)">
+        <form class="d-flex" id="searchForm" method="GET" autocomplete="off" onsubmit="search(event)">
 
           <!--Searching keyword -->
           <input class="form-control mx-2" type="text" name="keyword" id="keyword" placeholder="Search" aria-label="Search">
 
           <!--Searching city-->
-          <input class="form-control" list="datalistOptions" id="city_searching" name="city_searching" placeholder="Search by City...">
+          <input class="form-control mx-2" list="datalistOptions" id="city_searching" name="city_searching" placeholder="Search by City...">
             <datalist id="datalistOptions">
               <option value="طرابلس">
               <option value="سبها">
               <option value="بنغازي">
+            </datalist>
+
+          <!--Searching Category-->
+          <input class="form-control mx-2" list="datalistOptions" id="category_searching" name="category_searching" placeholder="Search by Category...">
+            <datalist id="datalistOptions">
+              <option value="التعليم">
+              <option value="البيئة">
+              <option value="إنساني">
             </datalist>
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
@@ -49,6 +57,7 @@
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">City</th>
+            <th scope="col">Category</th>
             <th scope="col">Posts By</th>
             <th scope="col">Created At</th>
             <th scope="col">Action</th>
@@ -70,9 +79,10 @@
           // Access the input field directly
          let keyword = document.querySelector('#keyword').value;
          let city = document.querySelector('#city_searching').value;
+         let category = document.querySelector('#category_searching').value;
 
           // Make the AJAX request
-          let response = await fetch('{{ route('posts.search') }}?' + new URLSearchParams({keyword, city}) );
+          let response = await fetch('{{ route('posts.search') }}?' + new URLSearchParams({keyword, city, category}) );
 
           // Check if the request was successful (status code 200)
           if (response.ok) {

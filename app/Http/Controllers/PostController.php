@@ -41,17 +41,20 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'max:20'],
             'city' => ['required','max:20'],
+            'category' => ['required','max:20'],
             'description' => ['required', 'min:10', 'max:120'],
         ]);
 
         $title = $request->title;
         $city = $request->city;
+        $category = $request->category;
         $description = $request->description;
         $postBy = auth()->user()->id;
 
         Post::create([
             'title' => $title,
             'city' => $city,
+            'category' => $category,
             'description' => $description,
             'user_id' => $postBy,
         ]);
@@ -74,11 +77,13 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required','max:20'],
             'city' => ['required','max:20'],
+            'category' => ['required','max:20'],
             'description' => ['required', 'min:10', 'max:120'],
         ]);
         // Get the data the user provide
         $title = $request->title;
         $city = $request->city;
+        $category = $request->category;
         $description = $request->description;
         $postsBy = $request->post_creator;
         
@@ -87,6 +92,7 @@ class PostController extends Controller
         $post->update([
             'title' => $title,
             'city' => $city,
+            'category' => $category,
             'description' => $description,
         ]);
 

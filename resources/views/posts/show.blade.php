@@ -10,6 +10,7 @@
             <div class="card-body">
                 <h5 class="card-title">Title: {{$post->title}}</h5>
                 <h5 class="card-title">City: {{$post->city}}</h5>
+                <h5 class="card-title">Category: {{$post->category}}</h5>
                 <p class="card-text">{{$post->description}}</p>
             </div>
         </div>   
