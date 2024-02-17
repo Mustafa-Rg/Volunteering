@@ -14,26 +14,23 @@
     <nav class="navbar bg-light">
       <div class="container-fluid">
         <form class="d-flex" id="searchForm" method="GET" autocomplete="off" onsubmit="search(event)">
-
-          <!--Searching keyword -->
-          <input class="form-control mx-2" type="text" name="keyword" id="keyword" placeholder="Search" aria-label="Search">
-
-          <!--Searching city-->
-          <input class="form-control mx-2" list="datalistOptions" id="city_searching" name="city_searching" placeholder="Search by City...">
-            <datalist id="datalistOptions">
-              <option value="طرابلس">
-              <option value="سبها">
-              <option value="بنغازي">
+            <!-- Searching keyword -->
+            <input class="form-control mx-2" type="text" name="keyword" id="keyword" placeholder="Search" aria-label="Search">
+            <!-- Searching city -->
+            <input class="form-control mx-2" list="cityOptions" id="city_searching" name="city_searching" placeholder="Search by City...">
+            <datalist id="cityOptions">
+                <option value="طرابلس">
+                <option value="سبها">
+                <option value="بنغازي">
             </datalist>
-
-          <!--Searching Category-->
-          <input class="form-control mx-2" list="datalistOptions" id="category_searching" name="category_searching" placeholder="Search by Category...">
-            <datalist id="datalistOptions">
-              <option value="التعليم">
-              <option value="البيئة">
-              <option value="إنساني">
+            <!-- Searching Category -->
+            <input class="form-control mx-2" list="categoryOptions" id="category_searching" name="category_searching" placeholder="Search by Category...">
+            <datalist id="categoryOptions">
+                <option value="التعليم">
+                <option value="البيئة">
+                <option value="إنساني">
             </datalist>
-          <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </nav>

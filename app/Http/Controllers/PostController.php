@@ -112,26 +112,41 @@ class PostController extends Controller
         $request->validate([
             'keyword' => ['nullable', 'string'],
             'city' => ['nullable', 'string'],
+            'category' => ['nullable', 'string'],
         ]);
-        
+    
         $searchKeyword = htmlspecialchars(strip_tags($request->keyword));
         $city = $request->city;
-        // Handle the case when the input is empty,return all posts
-        if (empty($searchKeyword) && empty($city)) {
-            $posts = Post::all();
-        } else if (empty($city)){
-            // Show only the posts that match the searching keyword
-            $posts = Post::where('description', 'like', "%$searchKeyword%")->get();
-        } else if (empty($searchKeyword)){
-            // Show only the posts that match the searching keyword
-            $posts = Post::where('city', 'like', "%$city%")->get();
-        } else {
-            // Show only the posts that match the searching keyword
-            $posts = Post::where('description', 'like', "%$searchKeyword%")
-                            ->where('city', 'like', "%$city%")
-                            ->get();
-        }
+        $category = $request->category;
+    
+        $posts = Post::query();
+    
+        if (empty($searchKeyword) && empty($city) && empty($category)) {
 
-        return view('posts.search-results', ['posts' => $posts]);
+            // Retrieve all posts when all parameters are empty
+            $posts = Post::all();
+            return view('posts.search-results', ['posts' => $posts]);
+
+        } else {
+
+            // Add conditions for each parameter when not empty
+            if (!empty($searchKeyword)) {
+                $posts->where('description', 'like', "%$searchKeyword%");
+            }
+    
+            if (!empty($city)) {
+                $posts->where('city', 'like', "%$city%");
+            }
+    
+            if (!empty($category)) {
+                $posts->where('category', 'like', "%$category%");
+            }
+        }
+    
+        // Get the results
+        $resultPosts = $posts->get();
+    
+        return view('posts.search-results', ['posts' => $resultPosts]);
     }
+    
 }
