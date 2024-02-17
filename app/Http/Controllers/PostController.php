@@ -126,6 +126,6 @@ class PostController extends Controller
                             ->get();
         }
 
-        return view('posts.search_results', ['posts' => $posts]);
+        return view('posts.search-results', ['posts' => $posts]);
     }
 }
