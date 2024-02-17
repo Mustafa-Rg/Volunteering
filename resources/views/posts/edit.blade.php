@@ -25,16 +25,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
-                    <input type="text" name="category" class="form-control" value="{{$post->category}}" id="category" placeholder="category">
+                    <input type="text" name="category" class="form-control" value="{{$post->category}}" id="category" placeholder="City">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea name="description" class="form-control" id="description" rows="3">{{$post->description}}</textarea>
                 </div>
-              
-
-
-                
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
