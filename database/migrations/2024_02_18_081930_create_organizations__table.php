@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('location');
             $table->string('category');
-            $table->text('brief');
+            $table->text('about');
             $table->string('logo_path')->nullable();
             $table->string('phone_number')->nullable();
             $table->timestamps();

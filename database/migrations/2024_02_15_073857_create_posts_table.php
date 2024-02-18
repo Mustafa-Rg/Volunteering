@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->float('hours_of_volunteering');
             $table->string('city');
-            $table->string('category');
+            $table->string('post_category');
             $table->timestamps();
         });
     }
