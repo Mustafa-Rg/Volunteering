@@ -10,16 +10,24 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
+        'organization_id',
         'title', 
+        'description',
         'city',
         'category',
-        'description',
-        'user_id',
+        'hours_of_volunteering'
     ];
+    // It's uses organization's primary key 'id' to create a foreign key 'organization_id' for each post 'one to many'.
+    public function organization() {
 
-    public function user() {
+    return $this->belongsTo(Organization::class);
 
-        return $this->belongsTo(related: User::class);
+}
 
+    // There is a one to many relationship between posts and applications where each post can have multiple applications.
+    public function application() {
+
+        return $this->hasMany(Application::class);
+        
     }
 }
