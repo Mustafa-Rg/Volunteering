@@ -1,0 +1,130 @@
+:root{
+    --main-color: #3857A3;
+}
+
+.sub{
+    margin-top: 20px;
+}
+
+.top{
+    margin-top:40px;
+    background-color: white;
+    height: 70px;
+    padding-top: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.search input{
+    height:40px;
+    width: 100%;
+    margin: auto;
+    padding: 4px 10px;
+}
+
+.iconofseach{
+    position: absolute;
+    left: 28px;
+    top: 12px;
+    color: gray;
+}
+
+.select{
+    height:40px ;
+    width: 100%;
+    cursor: pointer;
+
+}
+
+.ss{
+    width: 70%;
+    margin: auto;
+    color: white;
+    height: 40px;
+    background-color: var(--main-color);
+    cursor: pointer;
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+}
+
+.ss2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ss2 p {
+    transform: translateY(7px);
+}
+
+.ss1 p{
+    transform: translateY(4px);
+}
+
+.post{
+    height: 700px; 
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 40px;
+}
+
+.post-head{
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.volnteer, .hours{
+    background-color: var(--main-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.post-duties{
+    width: 70%;
+    margin-top: 20px;
+    text-align: start;
+    font-size: 20px;
+}
+
+.post-requirments{
+    width: 70%;
+    margin-top: 20px;
+    text-align: start;
+    font-size: 20px;
+}
+
+.post-extra{
+    width:100%;
+    margin-top: 20px;
+    text-align: start;
+    font-size: 20px;
+}
+
+.post-org{
+    width: 100%;
+    text-align: start;
+    display: flex;
+    align-items: center;
+}
+.post-org img{
+    width: 70px;
+}
+
+.dtl{
+    display: flex;
+    flex-direction: column;
+}
+
+.post button{
+    background-color: var(--main-color);
+    width:100px;
+    height: 40px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
