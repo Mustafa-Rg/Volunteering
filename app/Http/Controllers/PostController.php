@@ -149,11 +149,4 @@ class PostController extends Controller
         return view('posts.search-results', ['posts' => $resultPosts]);
     }
     
-    public function viewSubmit($postId){
-        // IN HERE THE ACTION OF SHOWING THE FORM OF APPLYING
-    }
-
-    public function storeSubmit(Post $post) {
-        // IN HERE THE ACTION OF STORING THE REPLY TO THE DATA BASE
-    }
 }
