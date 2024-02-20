@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Post;
 
@@ -45,11 +46,15 @@ class PostController extends Controller
             'description' => ['required', 'min:10', 'max:120'],
         ]);
 
+        $user = Auth::user();
+        $organization = $user->organization;
+
         $title = $request->title;
         $city = $request->city;
         $category = $request->category;
         $description = $request->description;
         $postBy = auth()->user()->id;
+        $organization_id = $organization->id;
 
         Post::create([
             'title' => $title,
@@ -57,6 +62,7 @@ class PostController extends Controller
             'category' => $category,
             'description' => $description,
             'user_id' => $postBy,
+            'organization_id' => $organization_id,
         ]);
 
         return to_route('posts.index');

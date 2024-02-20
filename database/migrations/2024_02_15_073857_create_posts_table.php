@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->string('title');
             $table->text('description');
-            $table->float('hours_of_volunteering');
+            $table->float('hours_of_volunteering')->nullable;
             $table->string('city');
-            $table->string('post_category');
+            $table->string('category');
             $table->timestamps();
         });
     }
