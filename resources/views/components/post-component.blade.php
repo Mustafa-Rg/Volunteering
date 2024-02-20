@@ -1,4 +1,4 @@
-{{-- post components of organisations --}}
+{{-- post components of organizations --}}
 
 <tr>
     <th scope="row">{{ $post->id }}</th>

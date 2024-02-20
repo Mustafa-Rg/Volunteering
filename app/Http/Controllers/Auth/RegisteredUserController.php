@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Volunteer;
+use App\Models\Organization;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -43,6 +45,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'user_type' => $request->user_type,
         ]);
+
+        if ($request->user_type === 'volunteer') {
+            Volunteer::create(['user_id' => $user->id]);
+        } else {
+            Organization::create(['user_id' => $user->id]);
+        }
 
         event(new Registered($user));
 

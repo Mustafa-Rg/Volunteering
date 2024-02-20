@@ -11,14 +11,18 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
     /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
+        $user = Auth::user();
+
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+
     }
 
     /**
@@ -26,6 +30,27 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $user = Auth::user();
+
+        // Update the organization's data
+        if ($user->user_type === 'organization') {
+            $organization = $user->organization;
+
+            $organization->location = $request->input('location');
+            $organization->category = $request->input('category');
+            $organization->about = $request->input('about');
+            $organization->phone_number = $request->input('phone_number');
+            $organization->save();
+
+        // Update the volunteer's data
+        } else if ($user->user_type === 'volunteer') {
+            $volunteer = $user->volunteer;
+
+            $volunteer->date_of_birth = $request->input('date_of_birth');
+            $volunteer->phone_number = $request->input('phone_number');
+            $volunteer->save();
+        }
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {

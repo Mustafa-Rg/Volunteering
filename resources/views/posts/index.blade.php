@@ -1,4 +1,4 @@
-{{-- organisation Dashboard --}}
+{{-- organization Dashboard --}}
 
 
 @extends('layouts.post-app')

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('location');
-            $table->string('category');
-            $table->text('about');
+            $table->string('location')->nullable();
+            $table->string('category')->nullable();
+            $table->text('about')->nullable();
             $table->string('logo_path')->nullable();
             $table->string('phone_number')->nullable();
             $table->timestamps();
