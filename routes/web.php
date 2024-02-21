@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth', 'verified', 'organization']], function ()
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('posts/search', [PostController::class, 'search'])->name('posts.search');
+    Route::get('/posts/{post}/submit', [PostController::class, 'viewSubmit'])->name('posts.submit-post');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 });
 
