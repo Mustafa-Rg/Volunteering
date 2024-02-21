@@ -25,7 +25,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
-                    <input type="text" name="category" class="form-control" value="{{$post->category}}" id="category" placeholder="category">
+                    <input type="text" name="category" class="form-control" value="{{$post->category}}" id="category" placeholder="City">
                 </div>
                 <div class="mb-3">
                     <label for="hours_of_volunteering" class="form-label" >Hours of Volunteering</label>

@@ -28,4 +28,12 @@
                 <p class="card-text">Created at: {{Auth::user()->created_at}}</p>
             </div>
         </div>
+
+        <!-- Apply to the post -->
+        <div class="mx-3 mt-3">
+            <form method="GET" action="{{route('posts.submit-post', $post->id)}}">
+                @csrf
+                <button type="submit" class="btn btn-success" >Apply</button>
+            </form>
+        </div>
     @endsection  
