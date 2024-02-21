@@ -43,6 +43,7 @@ class PostController extends Controller
             'title' => ['required', 'max:20'],
             'city' => ['required','max:20'],
             'category' => ['required','max:20'],
+            'hours_of_volunteering' => ['required', 'numeric'],
             'description' => ['required', 'min:10', 'max:120'],
         ]);
 
@@ -52,14 +53,20 @@ class PostController extends Controller
         $title = $request->title;
         $city = $request->city;
         $category = $request->category;
+        $hours_of_volunteering = $request->hours_of_volunteering;
         $description = $request->description;
+        $postBy = $user->name;
+
+        /*
         $postBy = auth()->user()->id;
+        */
         $organization_id = $organization->id;
 
         Post::create([
             'title' => $title,
             'city' => $city,
             'category' => $category,
+            'hours_of_volunteering' => $hours_of_volunteering,
             'description' => $description,
             'user_id' => $postBy,
             'organization_id' => $organization_id,
@@ -84,12 +91,14 @@ class PostController extends Controller
             'title' => ['required','max:20'],
             'city' => ['required','max:20'],
             'category' => ['required','max:20'],
+            'hours_of_volunteering' => ['required', 'number'],
             'description' => ['required', 'min:10', 'max:120'],
         ]);
         // Get the data the user provide
         $title = $request->title;
         $city = $request->city;
         $category = $request->category;
+        $hours_of_volunteering = $request->hours_of_volunteering;
         $description = $request->description;
         $postsBy = $request->post_creator;
         
@@ -99,6 +108,7 @@ class PostController extends Controller
             'title' => $title,
             'city' => $city,
             'category' => $category,
+            'hours_of_volunteering' => $hours_of_volunteering,
             'description' => $description,
         ]);
 

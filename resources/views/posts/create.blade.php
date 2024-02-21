@@ -22,12 +22,14 @@
                 <div class="mb-3">
                     <label for="city" class="form-label" >City</label>
                     <input type="text" name="city" class="form-control" id="city"  placeholder="Add the city" value="{{old('city')}}">
-                    
-                    <input type="hidden" value="{{ auth()->user()->name}} " name="post_creator">
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label" >Category</label>
                     <input type="text" name="category" class="form-control" id="category"   placeholder="Add the post's category" value="{{old('category')}}">
+                </div>
+                <div class="mb-3">
+                    <label for="hours_of_volunteering" class="form-label" >Hours of Volunteering</label>
+                    <input type="number" name="hours_of_volunteering" class="form-control" id="hours_of_volunteering" placeholder="Add the hours of volunteering" value="{{old('hours_of_volunteering')}}">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label" >Description</label>

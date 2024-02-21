@@ -55,6 +55,7 @@
             <th scope="col">Title</th>
             <th scope="col">City</th>
             <th scope="col">Category</th>
+            <th scope="col">Hours</th>
             <th scope="col">Posts By</th>
             <th scope="col">Created At</th>
             <th scope="col">Action</th>

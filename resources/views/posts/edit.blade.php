@@ -28,13 +28,13 @@
                     <input type="text" name="category" class="form-control" value="{{$post->category}}" id="category" placeholder="category">
                 </div>
                 <div class="mb-3">
+                    <label for="hours_of_volunteering" class="form-label" >Hours of Volunteering</label>
+                    <input type="number" name="hours_of_volunteering" class="form-control" id="hours_of_volunteering" placeholder="Add the hours of volunteering" value="{{$post->hours_of_volunteering}}">
+                </div>
+                <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea name="description" class="form-control" id="description" rows="3">{{$post->description}}</textarea>
                 </div>
-              
-
-
-                
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
