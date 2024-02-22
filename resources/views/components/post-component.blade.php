@@ -4,6 +4,7 @@
     use Illuminate\Support\Facades\Auth;
     use App\Models\Organization;
 
+    // Access the organizations table using the organization_id that in the post, alos we can access user table
     $organization = Organization::with('user')->find($post->organization_id);
 ?>
 

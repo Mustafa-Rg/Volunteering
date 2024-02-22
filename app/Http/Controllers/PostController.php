@@ -11,24 +11,18 @@ class PostController extends Controller
 {
     public function index() {
 
-        /* $posts = Post::orderBy('id', 'DESC')->paginate(4); // Select * from posts
-        $posts = Post::latest()->take(4)->get();
-        */
-
         $user = User::find(auth()->user()->id);
         $posts = Post::query();
 
+        //Show all of the posts if the user is a volunteer
         if ($user->user_type === 'volunteer') {
-
             $posts = Post::latest()->get();
             return view('posts.vol-index', ['posts' => $posts]);
-
         } elseif ($user->user_type  === 'organization') {
-
+            // Show only the organizations's posts that loged in
             $organization_id = $user->organization->id;
             $posts = $posts->where('organization_id', $organization_id)->latest()->get();
             return view('posts.index', ['posts' => $posts]);
-
         } else {
             // Handle other user types or show an error view
             return abort(403, 'Unauthorized');
@@ -46,7 +40,7 @@ class PostController extends Controller
     }
 
     public function store(Request $request) {
-        
+        // Validation of the user's inputs
         $request->validate([
             'title' => ['required', 'max:20'],
             'city' => ['required','max:20'],
@@ -55,21 +49,18 @@ class PostController extends Controller
             'description' => ['required', 'min:10', 'max:120'],
         ]);
 
+        // Access the inputs of validations
         $user = Auth::user();
         $organization = $user->organization;
-
         $title = $request->title;
         $city = $request->city;
         $category = $request->category;
         $hours_of_volunteering = $request->hours_of_volunteering;
         $description = $request->description;
         $postBy = $user->name;
-
-        /*
-        $postBy = auth()->user()->id;
-        */
         $organization_id = $organization->id;
 
+        // Create a post usign the user's inputs
         Post::create([
             'title' => $title,
             'city' => $city,
@@ -80,6 +71,7 @@ class PostController extends Controller
             'organization_id' => $organization_id,
         ]);
 
+        // Redirct the user to the posts dashboard
         return to_route('posts.index');
     }
 
@@ -93,7 +85,7 @@ class PostController extends Controller
 
     public function update($postId) {
 
-        // Validate user input
+        // Validate user's input
         $request = request();
         $request->validate([
             'title' => ['required','max:20'],
@@ -102,6 +94,7 @@ class PostController extends Controller
             'hours_of_volunteering' => ['required', 'number'],
             'description' => ['required', 'min:10', 'max:120'],
         ]);
+
         // Get the data the user provide
         $title = $request->title;
         $city = $request->city;
