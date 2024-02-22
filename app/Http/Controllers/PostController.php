@@ -11,14 +11,24 @@ class PostController extends Controller
 {
     public function index() {
 
-        // $posts = Post::orderBy('id', 'DESC')->paginate(4); // Select * from posts
+        /* $posts = Post::orderBy('id', 'DESC')->paginate(4); // Select * from posts
         $posts = Post::latest()->take(4)->get();
-        $userType = auth()->user()->user_type;
+        */
 
-        if ($userType === 'volunteer') {
+        $user = User::find(auth()->user()->id);
+        $posts = Post::query();
+
+        if ($user->user_type === 'volunteer') {
+
+            $posts = Post::latest()->get();
             return view('posts.vol-index', ['posts' => $posts]);
-        } elseif ($userType === 'organization') {
+
+        } elseif ($user->user_type  === 'organization') {
+
+            $organization_id = $user->organization->id;
+            $posts = $posts->where('organization_id', $organization_id)->latest()->get();
             return view('posts.index', ['posts' => $posts]);
+
         } else {
             // Handle other user types or show an error view
             return abort(403, 'Unauthorized');
@@ -32,9 +42,7 @@ class PostController extends Controller
     }
 
     public function create() {
-        $users = User::all();
-
-        return view('posts.create', ['users' => $users]);
+        return view('posts.create');
     }
 
     public function store(Request $request) {
@@ -124,7 +132,6 @@ class PostController extends Controller
     }
 
     public function search(Request $request) {
-
         $request->validate([
             'keyword' => ['nullable', 'string'],
             'city' => ['nullable', 'string'],
@@ -135,35 +142,36 @@ class PostController extends Controller
         $city = $request->city;
         $category = $request->category;
     
+        $userType = auth()->user()->user_type;
+    
         $posts = Post::query();
     
-        if (empty($searchKeyword) && empty($city) && empty($category)) {
-
-            // Retrieve all posts when all parameters are empty
-            $posts = Post::all();
-            return view('posts.search-results', ['posts' => $posts]);
-
-        } else {
-
-            // Add conditions for each parameter when not empty
-            if (!empty($searchKeyword)) {
-                $posts->where('description', 'like', "%$searchKeyword%");
-            }
+        // Add conditions for each parameter when not empty
+        if (!empty($searchKeyword)) {
+            $posts->where('description', 'like', "%$searchKeyword%");
+        }
     
-            if (!empty($city)) {
-                $posts->where('city', 'like', "%$city%");
-            }
+        if (!empty($city)) {
+            $posts->where('city', 'like', "%$city%");
+        }
     
-            if (!empty($category)) {
-                $posts->where('category', 'like', "%$category%");
-            }
+        if (!empty($category)) {
+            $posts->where('category', 'like', "%$category%");
+        }
+    
+        // Filter posts based on user type
+        if ($userType === 'organization') {
+            $organizationId = auth()->user()->organization->id;
+            $posts->where('organization_id', $organizationId);
         }
     
         // Get the results
-        $resultPosts = $posts->get();
+        $resultPosts = $posts->latest()->get();
     
         return view('posts.search-results', ['posts' => $resultPosts]);
     }
+    
+    
     
     public function viewSubmit($postId){
         // IN HERE THE ACTION OF SHOWING THE FORM OF APPLYING

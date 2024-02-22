@@ -1,5 +1,9 @@
 <?php
     use Illuminate\Support\Facades\Auth;
+    use App\Models\Organization;
+
+    $organization = Organization::with('user')->find($post->organization_id);
+
 ?>
 @extends('layouts.post-app')
 
@@ -23,8 +27,8 @@
                 Post Created Info
             </div>
             <div class="card-body">
-                <h5 class="card-title">Name: {{ Auth::user()->name }}</h5>
-                <p class="card-text">Email: {{ Auth::user()->email }}</p>
+                <h5 class="card-title">Name: {{ $organization->user->name }}</h5>
+                <p class="card-text">Email: {{ $organization->user->email }}</p>
                 <p class="card-text">Created at: {{Auth::user()->created_at}}</p>
             </div>
         </div>
