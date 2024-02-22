@@ -167,6 +167,7 @@ class PostController extends Controller
     
     public function viewSubmit($postId){
         // IN HERE THE ACTION OF SHOWING THE FORM OF APPLYING
+        echo "The submit is done";
     }
 
     public function storeSubmit(Post $post) {
