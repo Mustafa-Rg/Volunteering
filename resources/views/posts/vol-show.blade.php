@@ -32,4 +32,26 @@
                 <p class="card-text">Created at: {{Auth::user()->created_at}}</p>
             </div>
         </div>
+
+          <!-- Apply to the post -->
+    <div class="mx-3 mt-3">
+        <button id="applyButton" class="btn btn-success">Apply</button>
+
+        <form id="applicationForm" method="POST" action="{{route('posts.submit')}}" style="display: none;">
+            @csrf
+            <div class="form-group mt-3">
+                <label for="brief">Why do you want to apply for this post?</label>
+                <textarea class="form-control" id="brief" name="brief" rows="3" required></textarea>
+                <input type="hidden" name="post_id" class="form-control" id="post_id" autofocus  value="{{$post->id}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('applyButton').addEventListener('click', function() {
+            document.getElementById('applyButton').style.display = 'none';
+            document.getElementById('applicationForm').style.display = 'block';
+        });
+    </script>
     @endsection  

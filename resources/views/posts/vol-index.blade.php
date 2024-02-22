@@ -5,7 +5,11 @@
   @section('title') index @endsection
 
   @section('content')
-
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
      <!--Search bar-->
      <nav class="navbar bg-light">
       <div class="container-fluid">

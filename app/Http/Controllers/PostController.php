@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Application;
 
 class PostController extends Controller
 {
@@ -31,8 +32,17 @@ class PostController extends Controller
 
     public function show(Post $post) {
 
-        return view('posts.show', ['post' => $post]);
+        $user = User::find(auth()->user()->id);
 
+        //Show all of the posts if the user is a volunteer
+        if ($user->user_type === 'volunteer') {
+            return view('posts.vol-show', ['post' => $post]);
+        } elseif ($user->user_type  === 'organization') {
+            return view('posts.show', ['post' => $post]);
+        } else {
+            // Handle other user types or show an error view
+            return abort(403, 'Unauthorized');
+        }
     }
 
     public function create() {
@@ -165,13 +175,26 @@ class PostController extends Controller
     }
     
     
-    
-    public function viewSubmit($postId){
-        // IN HERE THE ACTION OF SHOWING THE FORM OF APPLYING
-        echo "The submit is done";
-    }
+    public function submitPost(Request $request) {
+        // Validate the user input
+        $request->validate([
+            'brief' => ['required', 'min:10', 'max:120'],
+            'post_id' => ['required', 'exists:posts,id'],
+        ]);
 
-    public function storeSubmit(Post $post) {
-        // IN HERE THE ACTION OF STORING THE REPLY TO THE DATA BASE
+        // Access the data of the application
+        $volunteerId = User::find(Auth::id())->volunteer->id;
+        $post_id = $request->post_id;
+        $brief = $request->brief;
+
+        // Create a new application record
+        Application::create([
+            'post_id' => $post_id,
+            'volunteer_id' => $volunteerId,
+            'brief' => $brief,
+        ]);
+
+        // Optionally, you can redirect the user after submitting the application
+        return to_route('posts.index')->with('success', 'Application submitted successfully!');
     }
 }

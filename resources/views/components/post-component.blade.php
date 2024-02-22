@@ -25,5 +25,7 @@
             @method('DELETE')
             <button type="submit" class="btn btn-danger" onclick="return confirm('Do you want to Delete the post?')">Delete</button>
         </form>
+        <a href="{{ route('posts.showSubmissions', $post->id) }}" class="btn btn-success">View Submissions</a>
+
     </td>
 </tr>
