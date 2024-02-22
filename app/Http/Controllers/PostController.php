@@ -197,4 +197,11 @@ class PostController extends Controller
         // Optionally, you can redirect the user after submitting the application
         return to_route('posts.index')->with('success', 'Application submitted successfully!');
     }
+
+    public function showSubmissions(Post $post) {
+       // Check thorw the application of the volunteers that submited to this post
+       $volunteers = Application::where('post_id', $post->id)->get();
+       
+       return view('posts.submitions', ['volunteers' => $volunteers]);
+    }
 }
